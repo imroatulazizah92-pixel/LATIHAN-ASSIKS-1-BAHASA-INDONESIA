@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASSIKS SD TRIMULYO 02 - BAHASA INDONESIA PAKET 1</title>
+    <style>
+        :root {
+            --primary: #1b5e20;
+            --primary-light: #4caf50;
+            --secondary: #0d47a1;
+            --secondary-light: #2196f3;
+            --danger: #d32f2f;
+            --warning: #f57c00;
+            --bg: #f4f6f9;
+            --card-bg: #ffffff;
+            --text: #212121;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), #2e7d32);
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* Card Style */
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        /* Login Screen */
+        #login-screen {
+            max-width: 450px;
+            margin: 40px auto;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .btn-green {
+            background-color: var(--primary-light);
+            color: white;
+        }
+        .btn-green:hover { background-color: var(--primary); }
+
+        .btn-blue {
+            background-color: var(--secondary-light);
+            color: white;
+        }
+        .btn-blue:hover { background-color: var(--secondary); }
+
+        .btn-red {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        /* Quiz Screen Layout */
+        #quiz-screen {
+            display: none;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #e8f5e9;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .timer-box {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--danger);
+            background: #ffebee;
+            padding: 6px 15px;
+            border-radius: 20px;
+            border: 1px solid #ffcdd2;
+        }
+
+        .quiz-body {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-body {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .soal-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .teks-bacaan {
+            background: #f9f9f9;
+            border-left: 4px solid var(--secondary-light);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .options-list {
+            margin-top: 15px;
+            list-style: none;
+        }
+
+        .options-list li {
+            margin-bottom: 10px;
+        }
+
+        .options-list label {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .options-list label:hover {
+            background-color: #f0f0f0;
+        }
+
+        .options-list input {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+
+        /* Matrix Table for Sesuai/Tidak Sesuai */
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .matrix-table th, .matrix-table td {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            text-align: center;
+        }
+
+        .matrix-table th {
+            background: #eee;
+        }
+
+        .matrix-table td:nth-child(1) {
+            text-align: left;
+        }
+
+        /* Right Navigation Grid (3 Columns) */
+        .nav-sidebar {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            height: fit-content;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .nav-btn {
+            padding: 10px;
+            background-color: #e0e0e0;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .nav-btn.active {
+            outline: 3px solid var(--secondary-light);
+        }
+
+        .nav-btn.answered {
+            background-color: var(--primary-light);
+            color: white;
+        }
+
+        .quiz-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        /* Result & Analysis Screen */
+        #result-screen {
+            display: none;
+        }
+
+        .alert-banner {
+            padding: 15px;
+            border-radius: 8px;
+            background: #e8f5e9;
+            color: var(--primary);
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .score-card {
+            text-align: center;
+            padding: 20px;
+            background: #f0f4c3;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .score-card h2 {
+            font-size: 3rem;
+            color: #33691e;
+        }
+
+        /* Analysis Canva-Style Spreadsheet Table */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .analysis-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .analysis-table th, .analysis-table td {
+            border: 1px solid #bbb;
+            padding: 8px 10px;
+            text-align: center;
+        }
+
+        .analysis-table th {
+            background: #37474f;
+            color: white;
+        }
+
+        .cell-correct {
+            background-color: #a5d6a7 !important;
+            color: #1b5e20;
+            font-weight: bold;
+        }
+
+        .cell-wrong {
+            background-color: #ef9a9a !important;
+            color: #b71c1c;
+            font-weight: bold;
+        }
+
+        .pembahasan-box {
+            margin-top: 25px;
+            border-top: 2px solid #ccc;
+            padding-top: 20px;
+        }
+
+        .pembahasan-item {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+        }
+
+        .pembahasan-item.correct-bg { border-left: 5px solid green; }
+        .pembahasan-item.wrong-bg { border-left: 5px solid red; }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>SDN TRIMULYO 02 SEMARANG</h1>
+    <p>LATIHAN SOAL ASSIKS (Asesmen Standar Siswa Kota Semarang) - BAHASA INDONESIA PAKET 1</p>
+</header>
+
+<div class="container">
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="card">
+        <h2 style="text-align: center; margin-bottom: 20px; color: var(--primary);">Formulir Peserta Ujian</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Nama Peserta:</label>
+                <input type="text" id="inputNama" placeholder="Masukkan nama lengkap" required>
+            </div>
+            <div class="form-group">
+                <label>Nomor Absen:</label>
+                <input type="number" id="inputAbsen" placeholder="Contoh: 12" required>
+            </div>
+            <div class="form-group">
+                <label>Kelas:</label>
+                <select id="inputKelas" required>
+                    <option value="6A">6A</option>
+                    <option value="6B">6B</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-green btn-block">Mulai Ujian</button>
+        </form>
+    </div>
+
+    <!-- QUIZ SCREEN -->
+    <div id="quiz-screen">
+        <div class="quiz-header">
+            <div>
+                <strong id="dispNama">Nama: -</strong> | <span id="dispKelas">Kelas: -</span> (<span id="dispAbsen">Absen: -</span>)
+            </div>
+            <div class="timer-box" id="timer">Waktu: 70:00</div>
+        </div>
+
+        <div class="quiz-body">
+            <!-- Left Side: Question Content -->
+            <div class="soal-box">
+                <div id="bacaanContainer" class="teks-bacaan"></div>
+                <h3 id="soalTitle" style="margin-bottom: 10px;">Soal Nomor 1</h3>
+                <div id="soalKonten"></div>
+
+                <div class="quiz-footer">
+                    <button id="btnPrev" class="btn btn-blue" onclick="changeQuestion(-1)" style="display:none;">Soal Sebelumnya</button>
+                    <button id="btnNext" class="btn btn-green" onclick="changeQuestion(1)">Soal Selanjutnya</button>
+                    <button id="btnSubmit" class="btn btn-red" onclick="finishQuiz(false)" style="display:none;">Selesaikan Ujian</button>
+                </div>
+            </div>
+
+            <!-- Right Side: Navigation Grid (3 Rows/Cols Format) -->
+            <div class="nav-sidebar">
+                <h4>Daftar Soal</h4>
+                <p style="font-size: 0.8rem; color: #666; margin-bottom: 10px;">Klik nomor untuk loncat soal.</p>
+                <div class="nav-grid" id="navGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESULT & REKAP SCREEN -->
+    <div id="result-screen" class="card">
+        <div id="finishBanner" class="alert-banner">Selamat, Anda telah menyelesaikan tugas!</div>
+        
+        <div class="score-card">
+            <h3>Skor Akhir Anda</h3>
+            <h2 id="scoreDisplay">0 / 100</h2>
+            <p id="rankInfo">Memuat peringkat...</p>
+        </div>
+
+        <h3 style="margin-top: 20px;">Peringkat Peserta Ujian</h3>
+        <div class="table-responsive">
+            <table class="analysis-table" id="leaderboardTable">
+                <thead>
+                    <tr>
+                        <th>Peringkat</th>
+                        <th>Nama</th>
+                        <th>Kelas</th>
+                        <th>No. Absen</th>
+                        <th>Skor</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboardBody"></tbody>
+            </table>
+        </div>
+
+        <h3 style="margin-top: 30px;">Analisis Penilaian Siswa (Per Soal)</h3>
+        <p style="font-size: 0.85rem; color: #555;">(Warna Hijau = Benar, Warna Merah = Salah)</p>
+        <div class="table-responsive">
+            <table class="analysis-table" id="analysisTable">
+                <thead id="analysisHead"></thead>
+                <tbody id="analysisBody"></tbody>
+            </table>
+        </div>
+
+        <div class="pembahasan-box">
+            <h3>Kunci Jawaban & Pembahasan Lengkap</h3>
+            <div id="pembahasanContainer"></div>
+        </div>
+
+        <div style="margin-top: 30px; text-align: center;">
+            <button class="btn btn-red" onclick="location.reload()">Keluar dari Aplikasi</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// DATA SOAL ASSIKS PAKET 1 BAHASA INDONESIA
+const quizData = [
+    {
+        id: 1,
+        bacaan: `<b>Keberagaman di Lembah Harmoni</b><br>Di Lembah Harmoni hiduplah beberapa kelompok hewan. Ada Kambing Gunung, Tupai, dan Bebek. Mereka hidup berkelompok, tetapi hanya mementingkan kelompok masing-masing. Semua berubah saat badai dan banjir melanda lembah mereka. Satu-satunya tempat aman yang tersisa adalah bukit batu yang tinggi. Bukit itu milik kawanan Kambing Gunung.<br>Awalnya, Koko, si pemimpin kambing, menolak kedatangan Tupai dan Bebek...`,
+        tipe: 'pg',
+        soal: 'Siapa saja tokoh dalam cerita?',
+        opsi: ['A. Tupi, ikan, dan Koko.', 'B. Ikan, Beni, dan Koko.', 'C. Koko, Tupi, dan Beni.', 'D. Tupi, Beni, dan ikan.'],
+        kunci: 'C',
+        pembahasan: 'Tokoh utama dalam cerita tersebut adalah Koko (kambing gunung), Tupi (tupai), dan Beni (bebek).'
+    },
+    {
+        id: 2,
+        bacaan: `<b>Keberagaman di Lembah Harmoni</b> (Teks Soal No 1-3)`,
+        tipe: 'pgk',
+        soal: 'Amanat yang disampaikan melalui cerita adalah (Pilih lebih dari satu):',
+        opsi: [
+            'Menghargai keberagaman sebagai kekuatan menghadapi masalah.',
+            'Mengutamakan kepentingan kelompok saat menghadapi kesulitan.',
+            'Menerapkan toleransi dan kerja sama saat menghadapi persoalan.'
+        ],
+        kunci: [0, 2],
+        pembahasan: 'Amanat cerita menekankan pentingnya menghargai keberagaman serta menerapkan toleransi dan kerja sama.'
+    },
+    {
+        id: 3,
+        bacaan: `<b>Keberagaman di Lembah Harmoni</b> (Teks Soal No 1-3)`,
+        tipe: 'pgk',
+        soal: 'Makna ungkapan "berbesar hati" dalam cerita adalah (Pilih lebih dari satu):',
+        opsi: [
+            'Berkenan menerima kelompok lain karena keadaan mendesak.',
+            'Bersedia menerima keadaan dengan tulus tanpa rasa terpaksa.',
+            'Bersikap terbuka terhadap kehadiran kelompok yang berbeda.'
+        ],
+        kunci: [1, 2],
+        pembahasan: 'Berbesar hati berarti bersedia menerima keadaan secara tulus dan terbuka terhadap kehadiran kelompok berbeda.'
+    },
+    {
+        id: 4,
+        bacaan: `<b>Desa Sukamaju</b><br>Desa Sukamaju merupakan potret kedamaian di kaki gunung. Hamparan sawah membentang luas seperti permadani raksasa... Burung-burung berterbangan di atas sungai. Ada burung pipit, merpati, dan jalak...`,
+        tipe: 'pg',
+        soal: 'Kelompok kosakata khusus yang terdapat dalam bacaan adalah ....',
+        opsi: [
+            'A. pohon kelapa, tanaman padi, dan pepohonan hijau',
+            'B. burung pipit, burung merpati, dan burung jalak',
+            'C. ikan-ikan, burung-burung, dan pepohonan hijau',
+            'D. ikan-ikan, pepohonan hijau, dan burung pipit'
+        ],
+        kunci: 'B',
+        pembahasan: 'Burung pipit, merpati, dan jalak merupakan kosakata khusus (hiponim) dari kategori burung.'
+    },
+    {
+        id: 5,
+        bacaan: `<b>Desa Sukamaju</b> (Teks Soal No 4-6)`,
+        tipe: 'pgk',
+        soal: 'Ide pokok paragraf pertama dalam bacaan yaitu (Pilih lebih dari satu):',
+        opsi: [
+            'Desa Sukamaju memiliki suasana yang damai dan alami.',
+            'Udara di Desa Sukamaju terasa sejuk dan bebas polusi.',
+            'Keindahan alam menjadi ciri lingkungan Desa Sukamaju.'
+        ],
+        kunci: [0, 2],
+        pembahasan: 'Paragraf pertama menggambarkan kedamaian, keasrian, dan keindahan alam lingkungan Desa Sukamaju.'
+    },
+    {
+        id: 6,
+        bacaan: `<b>Desa Sukamaju</b> (Teks Soal No 4-6)`,
+        tipe: 'matrix',
+        soal: 'Cermatilah kesesuaian pernyataan berdasarkan bacaan dan gambar!',
+        pernyataan: [
+            'Keberadaan sungai jernih dan anak-anak menangkap ikan terdapat dalam bacaan dan ilustrasi.',
+            'Pemandangan pegunungan dan sawah menunjukkan Desa Sukamaju yang masih alami.',
+            'Petani pada ilustrasi mendukung suasana Desa Sukamaju berdasarkan bacaan.'
+        ],
+        kolom: ['Sesuai', 'Tidak Sesuai'],
+        kunci: ['Sesuai', 'Sesuai', 'Tidak Sesuai'],
+        pembahasan: 'Pernyataan 1 & 2 sesuai gambar & teks. Pernyataan 3 tidak sesuai karena ilustrasi menunjukkan anak-anak menangkap ikan & orang mencuci muka, bukan fokus petani.'
+    },
+    {
+        id: 7,
+        bacaan: `<b>Membuka Dunia melalui Kebiasaan Membaca</b><br>Kegiatan membaca memberikan banyak manfaat bagi anak... Upaya membangun kebiasaan membaca... Bahan bacaan perlu disesuaikan dengan perkembangan anak...`,
+        tipe: 'pg',
+        soal: 'Ikhtisar yang tepat dari teks tersebut adalah',
+        opsi: [
+            'A. Manfaat membaca -> Pembiasaan membaca -> Pemilihan bahan bacaan',
+            'B. Pembiasaan membaca -> Manfaat membaca -> Pemilihan bahan bacaan',
+            'C. Pemilihan bahan bacaan -> Manfaat membaca -> Pembiasaan membaca',
+            'D. Manfaat membaca -> Pemilihan bahan bacaan -> Pembiasaan membaca'
+        ],
+        kunci: 'A',
+        pembahasan: 'Urutan gagasan tiap paragraf: Paragraf 1 (Manfaat), Paragraf 2 (Pembiasaan), Paragraf 3 (Pemilihan bahan bacaan).'
+    },
+    {
+        id: 8,
+        bacaan: `<b>Membuka Dunia melalui Kebiasaan Membaca</b> (Teks Soal No 7-9)`,
+        tipe: 'pgk',
+        soal: 'Perubahan pada anak setelah terbiasa membaca menurut isi teks adalah (Pilih lebih dari satu):',
+        opsi: [
+            'Wawasan anak bertambah karena memperoleh berbagai pengetahuan baru.',
+            'Kemampuan berpikir berkembang karena memahami berbagai informasi baru.',
+            'Kosakata anak bertambah sehingga kemampuan komunikasi kurang berkembang.'
+        ],
+        kunci: [0, 1],
+        pembahasan: 'Membaca menambah wawasan dan melatih kemampuan berpikir kritis.'
+    },
+    {
+        id: 9,
+        bacaan: `<b>Membuka Dunia melalui Kebiasaan Membaca</b> (Teks Soal No 7-9)`,
+        tipe: 'pgk',
+        soal: 'Makna ungkapan "membuka jendela dunia" dalam teks adalah (Pilih lebih dari satu):',
+        opsi: [
+            'Mengenal berbagai hal di dunia melalui kegiatan membaca.',
+            'Mengetahui berbagai tempat di dunia tanpa mengunjunginya.',
+            'Memperoleh pengetahuan luas melalui berbagai bacaan.'
+        ],
+        kunci: [0, 2],
+        pembahasan: 'Membuka jendela dunia mengkiaskan perolehan wawasan dan pengetahuan luas melalui membaca.'
+    },
+    {
+        id: 10,
+        bacaan: `<b>Rumah Pohon yang Miring</b><br>Upik: "Yah, rumah pohonnya miring..."<br>Bobi: "Tenang, Upik! Kita perbaiki bersama..."<br>Cici: "Mari kita bagi tugas! Bobi mengambil kayu dan alat dari gudang..."`,
+        tipe: 'pg',
+        soal: 'Siapa yang bertugas mengambil kayu dan alat dari gudang?',
+        opsi: ['A. Upik', 'B. Cici', 'C. Emak', 'D. Bobi'],
+        kunci: 'D',
+        pembahasan: 'Berdasarkan dialog Cici, Bobi bertugas mengambil kayu dan alat dari gudang.'
+    },
+    {
+        id: 11,
+        bacaan: `<b>Rumah Pohon yang Miring</b> (Teks Soal No 10-12)`,
+        tipe: 'pgk',
+        soal: 'Amanat yang disampaikan melalui teks adalah (Pilih lebih dari satu):',
+        opsi: [
+            'Pekerjaan berat terasa ringan jika dikerjakan bersama.',
+            'Pembagian tugas membuat pekerjaan lebih cepat selesai.',
+            'Keberhasilan pekerjaan bergantung pada satu orang saja.'
+        ],
+        kunci: [0, 1],
+        pembahasan: 'Teks mengajarkan pentingnya kerja sama dan pembagian tugas agar pekerjaan cepat dan ringan.'
+    },
+    {
+        id: 12,
+        bacaan: `<b>Rumah Pohon yang Miring</b> (Teks Soal No 10-12)`,
+        tipe: 'matrix',
+        soal: 'Cermatilah respons emosional pembaca terhadap peristiwa dalam teks!',
+        pernyataan: [
+            'Senang dengan kerja sama tokoh dalam menyelesaikan masalah hingga tuntas.',
+            'Terharu dengan kepedulian tokoh dalam membantu memperbaiki rumah pohon.',
+            'Kecewa dengan sikap tokoh yang mengabaikan perbaikan rumah pohon.'
+        ],
+        kolom: ['Sesuai', 'Tidak Sesuai'],
+        kunci: ['Sesuai', 'Sesuai', 'Tidak Sesuai'],
+        pembahasan: 'Tokoh-tokoh saling membantu dan antusias, bukan mengabaikan.'
+    },
+    {
+        id: 13,
+        bacaan: `<b>Pengalaman Sekolah yang Tak Terlupakan</b><br>Hari Senin pagi, murid-murid SD Nusantara melakukan kerja bakti... Hujan deras membuat halaman sekolah menjadi kotor. Daun-daun kering dan ranting berserakan di taman...`,
+        tipe: 'pg',
+        soal: 'Benda yang berserakan di taman, yaitu ....',
+        opsi: ['A. sapu dan daun kering', 'B. ranting dan pengki', 'C. daun kering dan ranting', 'D. pengki dan daun kering'],
+        kunci: 'C',
+        pembahasan: 'Teks menyatakan secara langsung bahwa daun-daun kering dan ranting berserakan di taman.'
+    },
+    {
+        id: 14,
+        bacaan: `<b>Pengalaman Sekolah yang Tak Terlupakan</b> (Teks Soal No 13-15)`,
+        tipe: 'pgk',
+        soal: 'Amanat yang disampaikan melalui teks adalah (Pilih lebih dari satu):',
+        opsi: [
+            'Kebersihan lingkungan sekolah merupakan tanggung jawab bersama.',
+            'Kerja sama antarmurid membuat pekerjaan akan terasa lebih ringan.',
+            'Kepedulian terhadap kebersihan menjadi tanggung jawab kelompok.'
+        ],
+        kunci: [0, 1],
+        pembahasan: 'Amanat utama cerita adalah kebersihan sekolah tanggung jawab bersama dan kerja sama meringankan pekerjaan.'
+    },
+    {
+        id: 15,
+        bacaan: `<b>Pengalaman Sekolah yang Tak Terlupakan</b> (Teks Soal No 13-15)`,
+        tipe: 'pgk',
+        soal: 'Perubahan sikap Dimas setelah mengikuti kegiatan kerja bakti adalah (Pilih lebih dari satu):',
+        opsi: [
+            'Kepedulian terhadap kebersihan sekolah semakin meningkat.',
+            'Keinginan untuk terus berbincang dengan teman semakin kuat.',
+            'Kesadaran untuk bekerja sama dengan teman semakin bertambah.'
+        ],
+        kunci: [0, 2],
+        pembahasan: 'Dimas menjadi lebih peduli kebersihan dan sadar pentingnya bekerja sama.'
+    },
+    {
+        id: 16,
+        bacaan: `<b>PENGUMUMAN KEGIATAN JUMAT SEHAT</b><br>Kegiatan diawali dengan senam bersama yang dipimpin oleh guru olahraga. Setelah itu, murid mengikuti jalan sehat... Selanjutnya, murid melakukan kerja bakti bersama guru...`,
+        tipe: 'pg',
+        soal: 'Bagaimana urutan pelaksanaan kegiatan Jumat Sehat?',
+        opsi: [
+            'A. Senam bersama, kerja bakti, kemudian jalan sehat.',
+            'B. Jalan sehat, senam bersama, kemudian kerja bakti.',
+            'C. Kerja bakti, senam bersama, kemudian jalan sehat.',
+            'D. Senam bersama, jalan sehat, kemudian kerja bakti.'
+        ],
+        kunci: 'D',
+        pembahasan: 'Urutan: (1) Senam bersama, (2) Jalan sehat, (3) Kerja bakti.'
+    },
+    {
+        id: 17,
+        bacaan: `<b>PENGUMUMAN KEGIATAN JUMAT SEHAT</b> (Teks Soal No 16-18)`,
+        tipe: 'pgk',
+        soal: 'Nilai yang dapat disimpulkan dari pengumuman adalah (Pilih lebih dari satu):',
+        opsi: [
+            'Kedisiplinan dalam mematuhi semua ketentuan selama kegiatan.',
+            'Kebersamaan dalam melaksanakan seluruh rangkaian kegiatan.',
+            'Kemandirian dalam menyelesaikan tugas yang diberikan guru.'
+        ],
+        kunci: [0, 1],
+        pembahasan: 'Pengumuman mengajarkan disiplin mematuhi aturan serta kebersamaan saat kerja bakti & senam.'
+    },
+    {
+        id: 18,
+        bacaan: `<b>PENGUMUMAN KEGIATAN JUMAT SEHAT</b> (Teks Soal No 16-18)`,
+        tipe: 'matrix',
+        soal: 'Cermatilah kesesuaian informasi dalam pengumuman!',
+        pernyataan: [
+            'Senam merupakan satu-satunya kegiatan untuk menjaga kesehatan.',
+            'Air minum diperlukan untuk menjaga kesehatan murid selama kegiatan.',
+            'Alat kebersihan digunakan untuk membersihkan lingkungan sekolah.'
+        ],
+        kolom: ['Benar', 'Salah'],
+        kunci: ['Salah', 'Benar', 'Benar'],
+        pembahasan: 'Pernyataan 1 Salah (ada jalan sehat juga). Pernyataan 2 & 3 Benar.'
+    },
+    {
+        id: 19,
+        bacaan: `<b>Persahabatan</b> Karya: Myerza<br>Persahabatan kita bagaikan lilin... Persahabatan juga bagai matahari...`,
+        tipe: 'pg',
+        soal: 'Persahabatan dalam puisi digambarkan melalui ....',
+        opsi: ['A. malam dan kelam', 'B. lilin dan matahari', 'C. cahaya dan lilin', 'D. hati dan hujan'],
+        kunci: 'B',
+        pembahasan: 'Bait 1 & 3 menggunakan kiasan lilin dan matahari.'
+    },
+    {
+        id: 20,
+        bacaan: `<b>Persahabatan</b> (Puisi Soal No 19-21)`,
+        tipe: 'pgk',
+        soal: 'Nilai kehidupan yang disampaikan melalui puisi yaitu (Pilih lebih dari satu):',
+        opsi: [
+            'Ketulusan sahabat terlihat dari kebaikan tanpa mengharapkan balasan.',
+            'Dukungan dari sahabat memberi kekuatan saat menghadapi kesulitan.',
+            'Kehadiran sahabat diperlukan saat kondisi seseorang sedang bahagia.'
+        ],
+        kunci: [0, 1],
+        pembahasan: 'Puisi menekankan ketulusan tanpa pamrih dan saling menguatkan dalam kesulitan.'
+    },
+    {
+        id: 21,
+        bacaan: `<b>Persahabatan</b> (Puisi Soal No 19-21)`,
+        tipe: 'pgk',
+        soal: 'Ungkapan "seperti lilin yang rela meleleh" pada puisi memiliki makna (Pilih lebih dari satu):',
+        opsi: [
+            'Ketulusan sahabat membantu tanpa mengharapkan balasan.',
+            'Kebaikan sahabat dilakukan untuk memperoleh penghargaan.',
+            'Kerelaan sahabat untuk berkorban demi kebaikan orang lain.'
+        ],
+        kunci: [0, 2],
+        pembahasan: 'Lilin yang meleleh menyimbolkan pengorbanan dan ketulusan membantu sesama.'
+    },
+    {
+        id: 22,
+        bacaan: `<b>Sepotong Roti untuk Maya</b><br>Rian melihat Maya duduk menyendiri... Maya bilang bekalnya jatuh... Rian membagi rotinya... Maya menerima roti...`,
+        tipe: 'pg',
+        soal: 'Urutan kejadian berdasarkan isi cerita adalah',
+        opsi: [
+            'A. Bekal Maya jatuh -> Rian memberikan roti -> Maya menerima roti',
+            'B. Rian memberikan roti -> Bekal Maya jatuh -> Maya menerima roti',
+            'C. Bekal Maya jatuh -> Maya menerima roti -> Rian memberikan roti',
+            'D. Maya menerima roti -> Bekal Maya jatuh -> Rian memberikan roti'
+        ],
+        kunci: 'A',
+        pembahasan: 'Kronologi peristiwa: Bekal jatuh terlebih dahulu, Rian menawarkan roti, lalu Maya menerima.'
+    },
+    {
+        id: 23,
+        bacaan: `<b>Sepotong Roti untuk Maya</b> (Teks Soal No 22-24)`,
+        tipe: 'pgk',
+        soal: 'Perubahan sikap Maya setelah mengalami peristiwa tersebut adalah (Pilih lebih dari satu):',
+        opsi: [
+            'Kepedulian terhadap teman yang kesulitan semakin meningkat.',
+            'Kemauan menerima bantuan dari teman semakin bertambah.',
+            'Keinginan membantu teman yang membutuhkan semakin kuat.'
+        ],
+        kunci: [0, 2],
+        pembahasan: 'Kalimat terakhir teks: "Sejak saat itu, Maya menjadi lebih peduli kepada teman yang mengalami kesulitan."'
+    },
+    {
+        id: 24,
+        bacaan: `<b>Sepotong Roti untuk Maya</b> (Teks Soal No 22-24)`,
+        tipe: 'matrix',
+        soal: 'Cermatilah hubungan peristiwa dalam teks dengan kehidupan sehari-hari!',
+        pernyataan: [
+            'Memberi makanan kepada teman yang membutuhkan merupakan tindakan terpuji.',
+            'Membantu teman yang mengalami kesulitan dapat mempererat hubungan persahabatan.',
+            'Menolong teman hanya perlu dilakukan jika kita pernah mengalami masalah yang sama.'
+        ],
+        kolom: ['Sesuai', 'Tidak Sesuai'],
+        kunci: ['Sesuai', 'Sesuai', 'Tidak Sesuai'],
+        pembahasan: 'Pernyataan 1 & 2 Sesuai. Pernyataan 3 Tidak Sesuai karena menolong tidak harus menunggu pernah mengalami hal sama.'
+    },
+    {
+        id: 25,
+        bacaan: `<b>CARA MERAWAT TANAMAN TOMAT DI POT</b><br>1. Penyiraman: Siram tanaman... Pastikan air tidak menggenang di dalam pot karena dapat menyebabkan akar membusuk.`,
+        tipe: 'pg',
+        soal: 'Mengapa air tidak boleh dibiarkan tergenang di dalam pot?',
+        opsi: [
+            'A. Mengurangi nutrisi pada tanah.',
+            'B. Menyebabkan akar membusuk.',
+            'C. Membuat daun menjadi sehat.',
+            'D. Mempercepat pertumbuhan buah.'
+        ],
+        kunci: 'B',
+        pembahasan: 'Teks menyebutkan secara eksplisit bahwa air tergenang dapat menyebabkan akar membusuk.'
+    },
+    {
+        id: 26,
+        bacaan: `<b>CARA MERAWAT TANAMAN TOMAT DI POT</b> (Teks Soal No 25-27)`,
+        tipe: 'pgk',
+        soal: 'Perubahan tanaman tomat setelah dirawat sesuai petunjuk adalah (Pilih lebih dari satu):',
+        opsi: [
+            'Daun sehat dan tetap hijau karena mendapat cukup cahaya matahari.',
+            'Buah jadi lebih besar karena memperoleh nutrisi dari pupuk kompos.',
+            'Akar menjadi lebih kokoh karena mendapat banyak air ketika disiram.'
+        ],
+        kunci: [0, 1],
+        pembahasan: 'Sinar matahari membuat daun tetap hijau/sehat; pupuk kompos membuat buah tumbuh besar.'
+    },
+    {
+        id: 27,
+        bacaan: `<b>CARA MERAWAT TANAMAN TOMAT DI POT</b> (Teks Soal No 25-27)`,
+        tipe: 'matrix',
+        soal: 'Cermatilah kesesuaian informasi pada teks dengan gambar!',
+        pernyataan: [
+            'Penempatan tanaman pada gambar kedua memperjelas kebutuhan sinar matahari.',
+            'Pemberian pupuk pada gambar ketiga memperjelas manfaat pupuk kompos.',
+            'Pemasangan penyangga pada gambar kelima memperjelas fungsi kayu penyangga.'
+        ],
+        kolom: ['Sesuai', 'Tidak Sesuai'],
+        kunci: ['Sesuai', 'Tidak Sesuai', 'Sesuai'],
+        pembahasan: 'Gambar 3 memperjelas cara pemberian pupuk, bukan teks penjelas manfaatnya.'
+    },
+    {
+        id: 28,
+        bacaan: `<b>Kiko si Kera dan Mangga Raja Hutan</b><br>Kiko panik. "A-anu, Paduka! Tadi ada angin puyuh yang meniup mangga-mangga itu sampai terbang!" jawabnya.`,
+        tipe: 'pg',
+        soal: 'Apa alasan yang disampaikan Kiko saat ditanya oleh Raja Hutan?',
+        opsi: [
+            'A. Aroma buah mangga membuatnya tergoda untuk mencicipinya.',
+            'B. Rasa buah mangga itu membuatnya ingin terus memakannya.',
+            'C. Angin puyuh yang meniup mangga-mangga itu sampai terbang.',
+            'D. Kulit buah mangga yang tertinggal di kepala akibat angin puyuh.'
+        ],
+        kunci: 'C',
+        pembahasan: 'Kiko berbohong dengan menyebutkan ada angin puyuh yang meniup mangga hingga terbang.'
+    },
+    {
+        id: 29,
+        bacaan: `<b>Kiko si Kera dan Mangga Raja Hutan</b> (Teks Soal No 28-30)`,
+        tipe: 'pgk',
+        soal: 'Peristiwa penting dalam cerita adalah (Pilih lebih dari satu):',
+        opsi: [
+            'Sebagian mangga dimakan Kiko setelah dititipkan kepadanya.',
+            'Kesalahan diakui oleh Kiko setelah kebohongannya terbongkar.',
+            'Hukuman diberikan Raja Hutan setelah mangganya berkurang.'
+        ],
+        kunci: [0, 1],
+        pembahasan: 'Peristiwa penting meliputi Kiko memakan mangga titipan dan pengakuan bersalah Kiko.'
+    },
+    {
+        id: 30,
+        bacaan: `<b>Kiko si Kera dan Mangga Raja Hutan</b> (Teks Soal No 28-30)`,
+        tipe: 'matrix',
+        soal: 'Cermatilah kesesuaian watak tokoh dengan tindakannya!',
+        pernyataan: [
+            'Kiko mudah tergoda terlihat dari ia kurang mampu mengendalikan keinginannya.',
+            'Kiko jujur karena ia mengakui kesalahan setelah kebohongannya terbongkar.',
+            'Raja Hutan bijaksana tercermin dari memaafkan Kiko setelah melakukan kesalahan.'
+        ],
+        kolom: ['Sesuai', 'Tidak Sesuai'],
+        kunci: ['Sesuai', 'Tidak Sesuai', 'Sesuai'],
+        pembahasan: 'Pernyataan 2 Tidak Sesuai karena jujur berarti tidak berbohong sejak awal, bukan baru mengaku setelah ketahuan.'
+    }
+];
+
+// STATE APLIKASI
+let currentUser = {};
+let currentQuestionIndex = 0;
+let userAnswers = {};
+let timerInterval = null;
+let timeLeft = 70 * 60; // 70 Menit
+
+// LOGIN HANDLER
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    currentUser = {
+        nama: document.getElementById('inputNama').value,
+        absen: document.getElementById('inputAbsen').value,
+        kelas: document.getElementById('inputKelas').value,
+        waktu: new Date().toLocaleTimeString()
+    };
+
+    document.getElementById('dispNama').innerText = "Nama: " + currentUser.nama;
+    document.getElementById('dispKelas').innerText = "Kelas: " + currentUser.kelas;
+    document.getElementById('dispAbsen').innerText = "Absen: " + currentUser.absen;
+
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+
+    renderNavGrid();
+    loadQuestion(0);
+    startTimer();
+});
+
+// RENDER NAVIGASI SOAL 3 KOLOM
+function renderNavGrid() {
+    const grid = document.getElementById('navGrid');
+    grid.innerHTML = '';
+    quizData.forEach((q, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'nav-btn';
+        btn.id = `nav-btn-${idx}`;
+        btn.innerText = idx + 1;
+        btn.onclick = () => loadQuestion(idx);
+        grid.appendChild(btn);
+    });
+}
+
+function updateNavGridState() {
+    quizData.forEach((q, idx) => {
+        const btn = document.getElementById(`nav-btn-${idx}`);
+        btn.classList.remove('active');
+        if (idx === currentQuestionIndex) {
+            btn.classList.add('active');
+        }
+        
+        if (isAnswered(idx)) {
+            btn.classList.add('answered');
+        } else {
+            btn.classList.remove('answered');
+        }
+    });
+}
+
+function isAnswered(idx) {
+    const ans = userAnswers[idx];
+    if (ans === undefined || ans === null) return false;
+    if (Array.isArray(ans)) return ans.length > 0;
+    if (typeof ans === 'object') return Object.keys(ans).length === quizData[idx].pernyataan.length;
+    return true;
+}
+
+// LOAD SOAL
+function loadQuestion(index) {
+    currentQuestionIndex = index;
+    const data = quizData[index];
+
+    document.getElementById('bacaanContainer').innerHTML = data.bacaan;
+    document.getElementById('soalTitle').innerText = `Soal Nomor ${index + 1}`;
+
+    const container = document.getElementById('soalKonten');
+    container.innerHTML = `<p style="font-weight:600; margin-bottom:15px;">${data.soal}</p>`;
+
+    if (data.tipe === 'pg') {
+        const ul = document.createElement('ul');
+        ul.className = 'options-list';
+        data.opsi.forEach((opt, oIdx) => {
+            const char = String.fromCharCode(65 + oIdx);
+            const checked = userAnswers[index] === char ? 'checked' : '';
+            ul.innerHTML += `
+                <li>
+                    <label>
+                        <input type="radio" name="opt" value="${char}" ${checked} onchange="saveAnswer('${char}')">
+                        ${opt}
+                    </label>
+                </li>
+            `;
+        });
+        container.appendChild(ul);
+    } 
+    else if (data.tipe === 'pgk') {
+        const ul = document.createElement('ul');
+        ul.className = 'options-list';
+        const currentAns = userAnswers[index] || [];
+        data.opsi.forEach((opt, oIdx) => {
+            const checked = currentAns.includes(oIdx) ? 'checked' : '';
+            ul.innerHTML += `
+                <li>
+                    <label>
+                        <input type="checkbox" name="opt_pgk" value="${oIdx}" ${checked} onchange="saveAnswerPGK()">
+                        ${opt}
+                    </label>
+                </li>
+            `;
+        });
+        container.appendChild(ul);
+    } 
+    else if (data.tipe === 'matrix') {
+        const table = document.createElement('table');
+        table.className = 'matrix-table';
+        let headHtml = `<thead><tr><th>Pernyataan</th>`;
+        data.kolom.forEach(k => headHtml += `<th>${k}</th>`);
+        headHtml += `</tr></thead>`;
+
+        let bodyHtml = `<tbody>`;
+        const currentAns = userAnswers[index] || {};
+        data.pernyataan.forEach((p, pIdx) => {
+            bodyHtml += `<tr><td>${p}</td>`;
+            data.kolom.forEach(k => {
+                const checked = currentAns[pIdx] === k ? 'checked' : '';
+                bodyHtml += `<td><input type="radio" name="matrix_${pIdx}" value="${k}" ${checked} onchange="saveAnswerMatrix(${pIdx}, '${k}')"></td>`;
+            });
+            bodyHtml += `</tr>`;
+        });
+        bodyHtml += `</tbody>`;
+
+        table.innerHTML = headHtml + bodyHtml;
+        container.appendChild(table);
+    }
+
+    // Toggle Nav Buttons
+    document.getElementById('btnPrev').style.display = index === 0 ? 'none' : 'inline-block';
+    if (index === quizData.length - 1) {
+        document.getElementById('btnNext').style.display = 'none';
+        document.getElementById('btnSubmit').style.display = 'inline-block';
+    } else {
+        document.getElementById('btnNext').style.display = 'inline-block';
+        document.getElementById('btnSubmit').style.display = 'none';
+    }
+
+    updateNavGridState();
+}
+
+// SAVE ANSWERS
+function saveAnswer(val) {
+    userAnswers[currentQuestionIndex] = val;
+    updateNavGridState();
+}
+
+function saveAnswerPGK() {
+    const checkboxes = document.querySelectorAll('input[name="opt_pgk"]:checked');
+    const vals = Array.from(checkboxes).map(cb => parseInt(cb.value));
+    userAnswers[currentQuestionIndex] = vals;
+    updateNavGridState();
+}
+
+function saveAnswerMatrix(pIdx, val) {
+    if (!userAnswers[currentQuestionIndex]) userAnswers[currentQuestionIndex] = {};
+    userAnswers[currentQuestionIndex][pIdx] = val;
+    updateNavGridState();
+}
+
+function changeQuestion(dir) {
+    const newIdx = currentQuestionIndex + dir;
+    if (newIdx >= 0 && newIdx < quizData.length) {
+        loadQuestion(newIdx);
+    }
+}
+
+// TIMER FUNCTION
+function startTimer() {
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        let min = Math.floor(timeLeft / 60);
+        let sec = timeLeft % 60;
+        document.getElementById('timer').innerText = `Waktu: ${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}`;
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            finishQuiz(true);
+        }
+    }, 1000);
+}
+
+// FINISH QUIZ & GENERATE REKAP ANALISIS
+function finishQuiz(isTimeout = false) {
+    clearInterval(timerInterval);
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('result-screen').style.display = 'block';
+
+    if (isTimeout) {
+        document.getElementById('finishBanner').innerText = "Maaf waktu habis, terima kasih atas partisipasinya!";
+        document.getElementById('finishBanner').style.background = "#ffebee";
+        document.getElementById('finishBanner').style.color = "#c62828";
+    }
+
+    // Hitung Nilai
+    let totalCorrect = 0;
+    let evalResults = [];
+
+    quizData.forEach((q, idx) => {
+        let isCorrect = false;
+        const uAns = userAnswers[idx];
+
+        if (q.tipe === 'pg') {
+            if (uAns === q.kunci) isCorrect = true;
+        } else if (q.tipe === 'pgk') {
+            if (Array.isArray(uAns)) {
+                const sUser = uAns.sort().join(',');
+                const sKunci = q.kunci.sort().join(',');
+                if (sUser === sKunci) isCorrect = true;
+            }
+        } else if (q.tipe === 'matrix') {
+            if (uAns && typeof uAns === 'object') {
+                let match = true;
+                q.kunci.forEach((kVal, kIdx) => {
+                    if (uAns[kIdx] !== kVal) match = false;
+                });
+                if (match) isCorrect = true;
+            }
+        }
+
+        if (isCorrect) totalCorrect++;
+        evalResults.push(isCorrect);
+    });
+
+    const finalScore = Math.round((totalCorrect / quizData.length) * 100);
+    document.getElementById('scoreDisplay').innerText = `${finalScore} / 100`;
+
+    // Leaderboard System via LocalStorage
+    let leaderboard = JSON.parse(localStorage.getItem('assiks_leaderboard') || '[]');
+    leaderboard.push({
+        nama: currentUser.nama,
+        kelas: currentUser.kelas,
+        absen: currentUser.absen,
+        skor: finalScore,
+        eval: evalResults
+    });
+
+    // Sort Descending
+    leaderboard.sort((a, b) => b.skor - a.skor);
+    localStorage.setItem('assiks_leaderboard', JSON.stringify(leaderboard));
+
+    // Render Leaderboard
+    const lbBody = document.getElementById('leaderboardBody');
+    lbBody.innerHTML = '';
+    let myRank = 0;
+
+    leaderboard.forEach((item, index) => {
+        if (item.nama === currentUser.nama && item.absen === currentUser.absen) {
+            myRank = index + 1;
+        }
+        lbBody.innerHTML += `
+            <tr ${item.nama === currentUser.nama ? 'style="font-weight:bold; background:#e8f5e9;"' : ''}>
+                <td>${index + 1}</td>
+                <td>${item.nama}</td>
+                <td>${item.kelas}</td>
+                <td>${item.absen}</td>
+                <td>${item.skor}</td>
+            </tr>
+        `;
+    });
+
+    document.getElementById('rankInfo').innerText = `Anda Berada di Peringkat ke-${myRank} dari ${leaderboard.length} Peserta`;
+
+    // Render Canva-Style Analysis Table (Per Soal / 1 Kolom 1 Soal)
+    const anHead = document.getElementById('analysisHead');
+    const anBody = document.getElementById('analysisBody');
+
+    let headHtml = `<tr><th>Nama Peserta</th><th>Skor</th>`;
+    for (let i = 1; i <= quizData.length; i++) {
+        headHtml += `<th>S${i}</th>`;
+    }
+    headHtml += `</tr>`;
+    anHead.innerHTML = headHtml;
+
+    let bodyHtml = '';
+    leaderboard.forEach(student => {
+        bodyHtml += `<tr><td>${student.nama} (${student.kelas})</td><td>${student.skor}</td>`;
+        student.eval.forEach(res => {
+            if (res) {
+                bodyHtml += `<td class="cell-correct">B</td>`;
+            } else {
+                bodyHtml += `<td class="cell-wrong">S</td>`;
+            }
+        });
+        bodyHtml += `</tr>`;
+    });
+    anBody.innerHTML = bodyHtml;
+
+    // Render Kunci & Pembahasan
+    const pemContainer = document.getElementById('pembahasanContainer');
+    pemContainer.innerHTML = '';
+
+    quizData.forEach((q, idx) => {
+        const isCorr = evalResults[idx];
+        let kunciStr = '';
+
+        if (q.tipe === 'pg') kunciStr = q.kunci;
+        else if (q.tipe === 'pgk') kunciStr = q.kunci.map(i => `Pernyataan ${i+1}`).join(', ');
+        else if (q.tipe === 'matrix') kunciStr = q.kunci.join(', ');
+
+        pemContainer.innerHTML += `
+            <div class="pembahasan-item ${isCorr ? 'correct-bg' : 'wrong-bg'}">
+                <h4>Soal No. ${idx + 1} (${isCorr ? 'BENAR' : 'SALAH'})</h4>
+                <p><strong>Soal:</strong> ${q.soal}</p>
+                <p><strong>Kunci Jawaban:</strong> ${kunciStr}</p>
+                <p><strong>Pembahasan:</strong> ${q.pembahasan}</p>
+            </div>
+        `;
+    });
+}
+</script>
+</body>
+</html>
